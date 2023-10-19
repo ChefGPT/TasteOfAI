@@ -30,11 +30,16 @@ router.get("/", (req, res) => {
 router.get("/OpenAI", async (req, res) => {
   try {
     const response = await axios.post(
-      "https://api.openai.com/v1/engines/davinci/completions",
+      "https://api.openai.com/v1/chat/completions",
       {
-        prompt:
-          "Translate the following English text to French: 'Hello, how are you?'",
-        max_tokens: 60,
+        messages: [
+          {
+            role: "user",
+            content: "I have chicken in the fridge, what should I make?",
+          },
+        ],
+        max_tokens: 1000,
+        model: "gpt-3.5-turbo",
       },
       {
         headers: {
